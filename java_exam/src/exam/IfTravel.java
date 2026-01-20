@@ -1,6 +1,15 @@
 package exam;
 
 public class IfTravel {
+	
+	public static int getFlightFare(int age) {
+		if( age >= 19) {
+			return 300_000;
+		}
+		else {
+			return 100_000;
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -22,21 +31,10 @@ public class IfTravel {
 			daughterFee = kidOneWayFlightFare;
 		}
 		
-		if(father >= 19) {
-			fatherFee = adultOneWayFlightFare;
-		}
-		else{
-			fatherFee = kidOneWayFlightFare;
-		}
-		if(mother >= 19) {
-			motherFee = adultOneWayFlightFare;
-		}
-		else{
-			motherFee = kidOneWayFlightFare;
-		}
+		int sum = getFlightFare(fatherFee) + getFlightFare(motherFee) + getFlightFare(daughterFee) ;
 		
 
-		int sum = fatherFee + motherFee + daughterFee;
+//		int sum = fatherFee + motherFee + daughterFee;
 		
 		if (sum > money) {
 			System.out.println("다음에가자");
