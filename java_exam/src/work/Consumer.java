@@ -20,6 +20,13 @@ public class Consumer {
 	 */
 	int holdMaxWeight;
 	
+	//생성자
+	public Consumer(int capital, int stuffPrize, int stuffWeight, int holdMaxWeight) {
+		this.capital = capital;
+		this.stuffPrize = stuffPrize;
+		this.stuffWeight = stuffWeight;
+		this.holdMaxWeight = holdMaxWeight;
+	}
 	/**
 	 * 구매 프로세스가 종료되었다면, 구매자의 상품 수, 장바구니의 무게, 지갑의 돈 출력
 	 * @return

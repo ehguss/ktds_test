@@ -10,7 +10,7 @@ public class CarTest {
 //		System.out.println(i);
 		
 		//Car - 클래스명 앞/뒤가 똑같이 만든는데 뒤에만 소괄호를 쓴다.
-		Car kona = new Car();
+		Car kona = new Car("KONA");
 		System.out.println(kona);		//oop.Car@7e9e5f8a
 		kona.pressEngineStartButton(); 	//코나의 시동을 건다.
 		kona.pressGasolinPedal(20); 	//30
@@ -25,7 +25,7 @@ public class CarTest {
 		
 		// 클래스를 인스턴스로 생성한다.
 		// 인스턴스를 만들어 Car 타입의 carnival 변수에 할당한다.
-		Car carnival = new Car();
+		Car carnival = new Car("CARNIVAL");
 		System.out.println(carnival);	//oop.Car@8bcc55f
 		
 		carnival.pressGasolinPedal(200);

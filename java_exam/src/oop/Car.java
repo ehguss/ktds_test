@@ -31,6 +31,18 @@ public class Car {
 	 */
 	int speed;
 	
+	/**
+	 * 자동차 모델명
+	 */
+	String name;
+	
+	//기본생성자
+	public Car(String name) {
+		// 멤버변수 = 파라미터 (멤버변수에 파라미터를 할당한다는 의미)
+		this.name = name;
+		
+	}
+	
 	// 인스턴스 메소드(static 사용하지 않음)
 	/**
 	 * <pre>
