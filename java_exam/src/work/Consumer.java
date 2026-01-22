@@ -7,11 +7,6 @@ public class Consumer {
 	int capital;
 	
 	/**
-	 * 구매하고자하는 상품의 개수 (=장바구니에 들어있는 상품의 개수)
-	 */
-	int buyCnt;
-	
-	/**
 	 * 상품 1개당 가격
 	 */
 	int stuffPrize;
@@ -29,7 +24,7 @@ public class Consumer {
 	 * 구매 프로세스가 종료되었다면, 구매자의 상품 수, 장바구니의 무게, 지갑의 돈 출력
 	 * @return
 	 */
-	public int buy() {
+	public int buy(int buyCnt) {
 		
 		int allStuffWeight = stuffWeight * buyCnt;
 		int allStuffPrize = stuffPrize * buyCnt;
