@@ -14,7 +14,7 @@ public class Coffee {
 	String name;
 	
 	/**
-	 * 커피메뉴의 가겨
+	 * 커피메뉴의 가격
 	 */
 	int price;
 	
