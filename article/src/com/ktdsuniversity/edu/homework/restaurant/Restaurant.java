@@ -27,6 +27,17 @@ public class Restaurant {
 	double restaurantDrunkLevel;
 	
 	/**
+	 * 식당에서 정한 배부름 정도
+	 */
+	int restaurantMaxFullLevel;
+	
+	/**
+	 * 식당에서 정한 취함 정도
+	 */
+	double restaurantMaxDrunkLevel;
+	
+	
+	/**
 	 * 레스토랑에서 판매하는 음식
 	 */
 	
@@ -38,20 +49,22 @@ public class Restaurant {
 	Menu drink;
 	
 	
-	public Restaurant(String name, int restaurantFullLevel, double restaurantDrunkLevel) {
+	public Restaurant(String name, int restaurantFullLevel, double restaurantDrunkLevel, int restaurantMaxFullLevel, double restaurantMaxDrunkLevel) {
 		this.name = name;
 		this.restaurantFullLevel = restaurantFullLevel;
 		this.restaurantDrunkLevel = restaurantDrunkLevel;
+		this.restaurantMaxFullLevel = restaurantMaxFullLevel;
+		this.restaurantMaxDrunkLevel = restaurantMaxDrunkLevel;
 	}
 	
-	public void isGuestCanOrder(Guest guest, int quantity) {
+	public void isGuestCanOrder(Guest guest, int cuisineQuantity, int drinkQuantity) {
 		//의사코드
 		//식당을 선택한다.(아웃백 : 1, 빕스 : 2, 매드포갈릭 : 3)
 		//식당에 입장한다
 		// 1. 구매자: 식사 가능한가요?
 		// 2. 판매자: 배부름정도와 취함정도를 알려주세요
 		//           손님의 배부름정도 > 식당의 기준배부름 && 손님의 취함정도 > 식당의 취함정도 라면 주문가능
-		if(guest.getFullnessLevel() < this.restaurantFullLevel && guest.getDrunkLevel() < this.restaurantDrunkLevel) {
+		if(guest.getFullnessLevel() < this.restaurantMaxFullLevel && guest.getDrunkLevel() < this.restaurantMaxDrunkLevel) {
 			// 3. 구매자: 음식 : 1 몇개, 주류 : 2 몇개 주문할께요
 			
 			int guestAsset = guest.getAsset();
@@ -64,16 +77,16 @@ public class Restaurant {
 				guest.setAsset(guestAsset);
 				
 				double guestDrunkLevel = guest.getDrunkLevel();
-				guestDrunkLevel += this.restaurantDrunkLevel * quantity;
+				guestDrunkLevel += this.restaurantDrunkLevel * drinkQuantity;
 				
 				guest.setDrunkLevel(guestDrunkLevel);
 				
 				int guestFullnessLevel = guest.getFullnessLevel();
-				guestFullnessLevel += this.restaurantFullLevel * quantity;
+				guestFullnessLevel += this.restaurantFullLevel * cuisineQuantity;
 				guest.setFullnessLevel(guestFullnessLevel);
 				
 				System.out.println("고객명 : " + guest.getName());
-				System.out.println(guest.getName() + "의 취함 정도 :" + guest.getDrunkLevel());
+				System.out.println(guest.getName() + "의 취함 정도 : " + guest.getDrunkLevel());
 				System.out.println(guest.getName() + "배부름 정도 : " + guest.getFullnessLevel());
 				System.out.println(guest.getName() + "소지금 : " + guest.getAsset());
 				System.out.println("주문 금액 : " + price);

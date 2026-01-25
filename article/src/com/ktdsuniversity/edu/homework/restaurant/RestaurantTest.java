@@ -30,12 +30,19 @@ public class RestaurantTest {
 		Menu madForGarlicCuisine = new Menu("스파게티", 10_000, 100);
 		Menu madForGarlicDrink = new Menu("와인", 5_000, 15);
 
-		Restaurant outBack = new Restaurant("outBack", 10000, 10000);
-		Restaurant vips = new Restaurant("vips", 100000, 10000);
-		Restaurant madForGarlic= new Restaurant("madForGarlic", 100000, 10000);
+		Restaurant outBack = new Restaurant("outBack", 10, 50, 10000, 10000);
+		Restaurant vips = new Restaurant("vips", 20, 50, 100000, 10000);
+		Restaurant madForGarlic= new Restaurant("madForGarlic", 30, 50, 100000, 10000);
 		
-		outBack.isGuestCanOrder(kimDoHyeon, 1);
-		outBack.isGuestCanOrder(leeJaeYong, 1);
+		outBack.isGuestCanOrder(kimDoHyeon, 2, 1);
+		outBack.isGuestCanOrder(leeJaeYong, 3, 5);
+		outBack.isGuestCanOrder(stevenJobs, 6, 6);
+		vips.isGuestCanOrder(stevenJobs, 1000, 0);
+		vips.isGuestCanOrder(kimDoHyeon, 5, 0);
+		vips.isGuestCanOrder(leeJaeYong, 100, 0);
+		madForGarlic.isGuestCanOrder(stevenJobs, 0, 2);
+		madForGarlic.isGuestCanOrder(kimDoHyeon, 6, 0);
+		madForGarlic.isGuestCanOrder(leeJaeYong, 5, 0);
 		
 		
 		
