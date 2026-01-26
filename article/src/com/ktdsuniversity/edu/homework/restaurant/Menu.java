@@ -6,7 +6,7 @@ public class Menu {
 	/**
 	 * 식당의 이름
 	 */
-	private String restaurantName;
+	private String menuName;
 	
 	/**
 	 * 메뉴의 가격
@@ -22,18 +22,18 @@ public class Menu {
 	 */
 	private int drinkDrunkLevel;
 	
-	public Menu(String restaurantName, int cuisineFullLevel, int drinkDrunkLevel) {
-		this.restaurantName = restaurantName;
+	public Menu(String menuName, int cuisineFullLevel, int drinkDrunkLevel) {
+		this.menuName = menuName;
 		this.cuisineFullLevel = cuisineFullLevel;
 		this.drinkDrunkLevel = drinkDrunkLevel;
 	}
 
-	public String getRestaurantName() {
-		return restaurantName;
+	public String getMenuName() {
+		return menuName;
 	}
 
-	public void setRestaurantName(String restaurantName) {
-		this.restaurantName = restaurantName;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
 	public int getPRICE() {

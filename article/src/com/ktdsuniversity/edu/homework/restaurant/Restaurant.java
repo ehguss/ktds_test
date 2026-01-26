@@ -56,7 +56,7 @@ public class Restaurant {
 		// 2. 판매자: 배부름정도와 취함정도를 알려주세요
 		//           손님의 배부름정도 > 식당의 기준배부름 && 손님의 취함정도 > 식당의 취함정도 라면 주문가능
 		int guestAsset = guest.getAsset();
-		int price= guest.getItemCnt() * 2_000;
+		int price= (cuisineQuantity + drinkQuantity) * cuisine.getPRICE();
 		if(guest.getFullnessLevel() < this.restaurantMaxFullLevel && guest.getDrunkLevel() < this.restaurantMaxDrunkLevel) {
 			// 3. 구매자: 음식 : 1 몇개, 주류 : 2 몇개 주문할께요
 			
@@ -77,8 +77,8 @@ public class Restaurant {
 				
 				System.out.println("고객명 : " + guest.getName());
 				System.out.println(guest.getName() + "의 취함 정도 : " + guest.getDrunkLevel());
-				System.out.println(guest.getName() + "배부름 정도 : " + guest.getFullnessLevel());
-				System.out.println(guest.getName() + "소지금 : " + guest.getAsset());
+				System.out.println(guest.getName() + "의 배부름 정도 : " + guest.getFullnessLevel());
+				System.out.println(guest.getName() + "의 소지금 : " + guest.getAsset());
 				System.out.println("주문 금액 : " + price);
 				System.out.println(this.name + "의 배부름 기준 : " + this.restaurantMaxFullLevel);
 				System.out.println(this.name + "의 취함 기준 : " + this.restaurantMaxDrunkLevel);
@@ -90,15 +90,14 @@ public class Restaurant {
 				System.out.println("주문 금액 : " + price);
 				System.out.println("주문 불가 : 잔고 부족\n");
 			}
-			return;
 		}
 		//           아니면 주문 불가
 		// 배부르고 취해서 주문이 불가한 경우
 		else if(guest.getFullnessLevel() >= this.restaurantMaxFullLevel && guest.getDrunkLevel() >= this.restaurantMaxDrunkLevel) {
 			System.out.println("고객명 : " + guest.getName());
 			System.out.println(guest.getName() + "의 취함 정도 : " + guest.getDrunkLevel());
-			System.out.println(guest.getName() + "배부름 정도 : " + guest.getFullnessLevel());
-			System.out.println(guest.getName() + "소지금 : " + guest.getAsset());
+			System.out.println(guest.getName() + "의 배부름 정도 : " + guest.getFullnessLevel());
+			System.out.println(guest.getName() + "의 소지금 : " + guest.getAsset());
 			System.out.println("주문 금액 : " + price);
 			System.out.println(this.name + "의 배부름 기준 : " + this.restaurantMaxFullLevel);
 			System.out.println(this.name + "의 취함 기준 : " + this.restaurantMaxDrunkLevel);
@@ -108,8 +107,8 @@ public class Restaurant {
 		else if(guest.getFullnessLevel() >= this.restaurantMaxFullLevel && guest.getDrunkLevel() < this.restaurantMaxDrunkLevel) {
 			System.out.println("고객명 : " + guest.getName());
 			System.out.println(guest.getName() + "의 취함 정도 : " + guest.getDrunkLevel());
-			System.out.println(guest.getName() + "배부름 정도 : " + guest.getFullnessLevel());
-			System.out.println(guest.getName() + "소지금 : " + guest.getAsset());
+			System.out.println(guest.getName() + "의 배부름 정도 : " + guest.getFullnessLevel());
+			System.out.println(guest.getName() + "의 소지금 : " + guest.getAsset());
 			System.out.println("주문 금액 : " + price);
 			System.out.println(this.name + "의 배부름 기준 : " + this.restaurantMaxFullLevel);
 			System.out.println(this.name + "의 취함 기준 : " + this.restaurantMaxDrunkLevel);
@@ -119,8 +118,8 @@ public class Restaurant {
 		else if(guest.getFullnessLevel() < this.restaurantMaxFullLevel && guest.getDrunkLevel() >= this.restaurantMaxDrunkLevel) {
 			System.out.println("고객명 : " + guest.getName());
 			System.out.println(guest.getName() + "의 취함 정도 : " + guest.getDrunkLevel());
-			System.out.println(guest.getName() + "배부름 정도 : " + guest.getFullnessLevel());
-			System.out.println(guest.getName() + "소지금 : " + guest.getAsset());
+			System.out.println(guest.getName() + "의 배부름 정도 : " + guest.getFullnessLevel());
+			System.out.println(guest.getName() + "의 소지금 : " + guest.getAsset());
 			System.out.println("주문 금액 : " + price);
 			System.out.println(this.name + "의 배부름 기준 : " + this.restaurantMaxFullLevel);
 			System.out.println(this.name + "의 취함 기준 : " + this.restaurantMaxDrunkLevel);

@@ -19,19 +19,12 @@ public class Guest {
 	 * 고객의 소지금
 	 */
 	private int asset;
-	
-	/**
-	 * 고객이 주문할 수량
-	 */
-	private int itemCnt;
-	
 
-	public Guest(String name, int fullnessLevel, double drunkLevel, int asset, int itemCnt) {
+	public Guest(String name, int fullnessLevel, double drunkLevel, int asset) {
 		this.name = name;
 		this.asset = asset;
 		this.fullnessLevel = fullnessLevel;
 		this.drunkLevel = drunkLevel;
-		this.itemCnt = itemCnt;
 	}
 	
 	public String getName() {
@@ -64,18 +57,12 @@ public class Guest {
 		this.asset = asset;
 	}
 	
-	public int getItemCnt() {
-		return itemCnt;
-	}
-	public void setItemCnt(int itemCnt) {
-		this.itemCnt = itemCnt;
-	}
 	
-	public boolean isCanEatCuisine(int cuisineFullLevel, int restaurantFullLevel) {
-		return this.fullnessLevel + cuisineFullLevel <= restaurantFullLevel;
-	}
-	
-	public boolean isCanDrink(double drinkDrunkLevel, double restaurantDrunkLevel) {
-		return this.drunkLevel + (drinkDrunkLevel*0.1) <= restaurantDrunkLevel;
-	}
+//	public boolean isCanEatCuisine(int cuisineFullLevel, int restaurantFullLevel) {
+//		return this.fullnessLevel + cuisineFullLevel <= restaurantFullLevel;
+//	}
+//	
+//	public boolean isCanDrink(double drinkDrunkLevel, double restaurantDrunkLevel) {
+//		return this.drunkLevel + (drinkDrunkLevel*0.1) <= restaurantDrunkLevel;
+//	}
 }

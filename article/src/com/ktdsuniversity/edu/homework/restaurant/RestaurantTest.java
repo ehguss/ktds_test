@@ -1,5 +1,7 @@
 package com.ktdsuniversity.edu.homework.restaurant;
 
+import com.ktdsuniversity.edu.coffee.Coffee;
+
 public class RestaurantTest {
 		
 	Restaurant outBack;
@@ -8,27 +10,27 @@ public class RestaurantTest {
 	
 	Restaurant madForGarlic;
 	
-	public RestaurantTest(Restaurant outBack, Restaurant vips, Restaurant madForGarlic) {
-		this.outBack = outBack;
-		this.vips = vips;
-		this.madForGarlic = madForGarlic;
-	}
+//	public RestaurantTest(Restaurant outBack, Restaurant vips, Restaurant madForGarlic) {
+//		this.outBack = outBack;
+//		this.vips = vips;
+//		this.madForGarlic = madForGarlic;
+//	}
 	
 	public static void main(String[] args) {
 		
-		Guest kimDoHyeon = new Guest("김도현", 100, 10, 50_000, 5);
-		Guest leeJaeYong = new Guest("이재용", 100, 10, 50_000, 5);
-		Guest stevenJobs = new Guest("스티브잡스", 100, 10, 50_000, 5);
+		Guest kimDoHyeon = new Guest("김도현", 100, 10, 50_000);
+		Guest leeJaeYong = new Guest("이재용", 100, 10, 50_000);
+		Guest stevenJobs = new Guest("스티브잡스", 100, 10, 50_000);
 		
 		
 		Menu outBackCuisine = new Menu("스파게티", 10, 100);
 		Menu outBackDrink = new Menu("와인", 40 , 15);
 
-		Menu vipsCuisine = new Menu("스파게티", 5, 100);
+		Menu vipsCuisine = new Menu("스테이크", 5, 100);
 		Menu vipsDrink = new Menu("와인", 50 , 15);
 
-		Menu madForGarlicCuisine = new Menu("스파게티", 8, 100);
-		Menu madForGarlicDrink = new Menu("와인", 60 , 15);
+		Menu madForGarlicCuisine = new Menu("타코", 8, 100);
+		Menu madForGarlicDrink = new Menu("데킬라", 60 , 15);
 		
 
 		Restaurant outBack = new Restaurant("outBack", outBackCuisine, outBackDrink, 5000, 9980);
@@ -45,7 +47,6 @@ public class RestaurantTest {
 		madForGarlic.isGuestCanOrder(stevenJobs, 0, 2);
 		madForGarlic.isGuestCanOrder(kimDoHyeon, 6, 0);
 		madForGarlic.isGuestCanOrder(leeJaeYong, 5, 0);
-		
 		
 		
 	}

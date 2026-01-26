@@ -8,6 +8,7 @@ package com.ktdsuniversity.edu.coffee;
  */
 public class Coffee {
 	
+	/// 멤버변수
 	/**
 	 * 커피 메뉴의 이름
 	 */
@@ -25,6 +26,9 @@ public class Coffee {
 	/**
 	 * 생성자 - 파라미터가 있으므로 기본생성자 생성 x
 	 */
+	
+	public static int num;
+	
 	public Coffee(String name, int price, int stock) {
 		// 생성자의 this는 생성자에서 말하는 인스턴스
 		this.name = name;

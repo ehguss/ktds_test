@@ -11,13 +11,24 @@ public class CoffeeShopTest {
 		Coffee iceCoffee = new Coffee("아이스티", 4000, 60);
 //		Coffee tea = new Coffee("캐모마일", 4500);
 		
-		CoffeeShop starbucks = new CoffeeShop(hotCoffee, iceCoffee);
+		CoffeeShop starbucks = new CoffeeShop();
+//		CoffeeShop starbucks = new CoffeeShop(hotCoffee, iceCoffee);
 		
+		//오버로딩을 하지 않았을때
 		int price = starbucks.orderCoffee(1, 3);
 		System.out.println(price);
 		
 		price = starbucks.orderCoffee(2, 6);
 		System.out.println(price);
+		
+		//메소드 오버로딩을 하게 되면 -> 파라미터사용안해도 됨.
+		System.out.println("====== 오버로딩 시작 ======");
+		price = starbucks.orderCoffee();
+		System.out.println(price);
+		
+		price = starbucks.orderCoffee(2);
+		System.out.println(price);
+		System.out.println("====== 오버로딩 끝 ======");
 
 //		CoffeeShopArray megaCoffee = new CoffeeShopArray(hotCoffee, iceCoffee, tea);
 //		
@@ -33,5 +44,6 @@ public class CoffeeShopTest {
 //		price = megaCoffee.orderCoffee(2, 10);
 //		System.out.println(price);
 
+		
 	}
 }

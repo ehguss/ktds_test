@@ -11,13 +11,40 @@ public class CoffeeShop {
 	 */
 	Coffee ice;
 	
-	
+	/**
+	 * 파라미터가 없는 생성자 오버로딩
+	 */
+	public CoffeeShop() {
+//		this.hot = new Coffee("기본 아메리카노", 1500, 30);
+//		this.ice = new Coffee("아이스 아메리카노", 2000, 50);
+		this(new Coffee("기본 아메리카노", 1500, 30)
+		   , new Coffee("아이스 아메리카노", 2000, 50)); 
+		// -> CoffeeShop(Coffee hot, Coffee ice) 호출
+	}
 	// 파라미터로 클래스의 인스턴스를 옮긴다.
 	public CoffeeShop(Coffee hot, Coffee ice) {
 		this.hot = hot;		//this - CoffeeShop
 		this.ice = ice;		//this - CoffeeShop
 	}
 	
+	// 메소드 오버로딩 시작
+	/**
+	 * 가장 첫번째 메뉴를 한 개 주문한다.
+	 * @return
+	 */
+	public int orderCoffee() {
+		int price = this.orderCoffee(1);
+		return price;
+	}
+	/**
+	 * 메뉴 한개만 주문한다.
+	 * @param menu 
+	 * @return
+	 */
+	public int orderCoffee(int menu) {
+		int price = this.orderCoffee(menu, 1);
+		return price;
+	}
 	/**
 	 * 커피숍에서 커피를 판매한다. 주문수량이 재고보다 많은경우 판매하지 않는다.
 	 * @param menu 메뉴들의 번호. 1: hot, 2: ice
@@ -27,7 +54,7 @@ public class CoffeeShop {
 	public int orderCoffee(int menu, int quantity) {
 		int hotStock = hot.getStock();
 		int iceStock = ice.getStock();
-
+		
 		if(menu == 1) {
 			//this를 붙이면서 출처를 명확하게 밝힌다.
 			//멤버변수의 hot
@@ -67,4 +94,7 @@ public class CoffeeShop {
 		}
 		
 	}
+	
+	// 메소드 오버로딩 끝
+	
 }
