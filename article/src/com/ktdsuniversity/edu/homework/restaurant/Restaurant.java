@@ -80,6 +80,7 @@ public class Restaurant {
 				System.out.println(guest.getName() + "배부름 정도 : " + guest.getFullnessLevel());
 				System.out.println(guest.getName() + "소지금 : " + guest.getAsset());
 				System.out.println("주문 금액 : " + price);
+				System.out.println(this.name + "의 배부름 기준 : " + this.restaurantMaxFullLevel);
 				System.out.println(this.name + "의 취함 기준 : " + this.restaurantMaxDrunkLevel);
 				System.out.println("주문 성공\n");
 			}
