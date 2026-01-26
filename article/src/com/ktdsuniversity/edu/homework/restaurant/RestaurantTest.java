@@ -21,18 +21,20 @@ public class RestaurantTest {
 		Guest stevenJobs = new Guest("스티브잡스", 100, 10, 50_000, 5);
 		
 		
-		Menu outBackCuisine = new Menu("스파게티", 10_000, 100);
-		Menu outBackDrink = new Menu("와인", 5_000, 15);
+		Menu outBackCuisine = new Menu("스파게티", 10, 100);
+		Menu outBackDrink = new Menu("와인", 40 , 15);
 
-		Menu vipsCuisine = new Menu("스파게티", 10_000, 100);
-		Menu vipsDrink = new Menu("와인", 5_000, 15);
+		Menu vipsCuisine = new Menu("스파게티", 5, 100);
+		Menu vipsDrink = new Menu("와인", 50 , 15);
 
-		Menu madForGarlicCuisine = new Menu("스파게티", 10_000, 100);
-		Menu madForGarlicDrink = new Menu("와인", 5_000, 15);
+		Menu madForGarlicCuisine = new Menu("스파게티", 8, 100);
+		Menu madForGarlicDrink = new Menu("와인", 60 , 15);
+		
 
-		Restaurant outBack = new Restaurant("outBack", 10, 50, 10000, 10000);
-		Restaurant vips = new Restaurant("vips", 20, 50, 100000, 10000);
-		Restaurant madForGarlic= new Restaurant("madForGarlic", 30, 50, 100000, 10000);
+		Restaurant outBack = new Restaurant("outBack", outBackCuisine, outBackDrink, 5000, 9980);
+		Restaurant vips = new Restaurant("vips", vipsCuisine, vipsDrink, 8000, 10000);
+		Restaurant madForGarlic= new Restaurant("madForGarlic", madForGarlicCuisine, madForGarlicDrink, 3000, 10000);
+
 		
 		outBack.isGuestCanOrder(kimDoHyeon, 2, 1);
 		outBack.isGuestCanOrder(leeJaeYong, 3, 5);
