@@ -26,6 +26,35 @@ public class Q11720 {
 		System.out.println("N개의 합 : " + sum);
 
 	}
+	
+	// 강사님 풀이
+	// 자릿수만큼 나눈 몫을 이용해서 구하기
+	public void printSum2() {
+		int length = num.length();
+		
+		int radix = 1;
+		for(int i = 1; i < length; i++) {
+			radix *= 10;
+		}
+		
+		long num = Long.parseLong(this.num);
+		int divResult = 0;
+		int sum = 0;
+		while(true) {
+			divResult = (int) (num/radix);
+			sum += divResult;
+
+			num -= (divResult * radix);
+			radix /= 10;
+			
+			if(radix == 0) {
+				break;
+			}
+		}
+		
+		System.out.println(sum);
+	}
+	
 	public static void main(String[] args) {
 		Q11720 question = new Q11720();
 		question.printSum();
