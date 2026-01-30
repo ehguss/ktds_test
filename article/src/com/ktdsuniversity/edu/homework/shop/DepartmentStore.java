@@ -83,12 +83,12 @@ public class DepartmentStore extends ConvenienceStore{
 			int wantUsePoint = sc.nextInt();
 			System.out.println("포인트가 "+ wantUsePoint +"원 사용되었습니다.");
 			consumer.setPoint(consumerPoint - wantUsePoint);
-		
 			return consumerPoint;
 		}
 		else {
 			System.out.println("가용포인트가 없습니다.");
 			return 0;
 		}
+		
 	}
 }
