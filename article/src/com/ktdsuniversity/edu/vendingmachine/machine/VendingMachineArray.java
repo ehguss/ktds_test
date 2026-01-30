@@ -4,7 +4,18 @@ import com.ktdsuniversity.edu.vendingmachine.item.VendingMachine;
 
 public class VendingMachineArray {
 	
-	VendingMachine[] drinks;
+	// === RefundableDrinkVendingMachine을 위한 수정 시작 === //
+	/**
+	 * 자판기 자본금
+	 */
+	private int account;
+	
+	private int receivedPrice;
+	
+	// === RefundableDrinkVendingMachine을 위한 수정 끝 === //
+	
+	private VendingMachine[] drinks;
+	
 	
 //	VendingMachine name;
 //	VendingMachine price;
@@ -24,7 +35,36 @@ public class VendingMachineArray {
 		this.drinks[2] = drink3;
 		this.drinks[3] = drink4;
 	}
-	
+
+	public int getAccount() {
+		return this.account;
+	}
+
+
+	public void setAccount(int account) {
+		this.account = account;
+	}
+
+
+	public int getReceivedPrce() {
+		return this.receivedPrice;
+	}
+
+
+	public void setReceivedPrice(int receivedPrice) {
+		this.receivedPrice = receivedPrice;
+	}
+
+
+	public VendingMachine[] getDrinks() {
+		return this.drinks;
+	}
+
+
+	public void setDrinks(VendingMachine[] drinks) {
+		this.drinks = drinks;
+	}
+
 	/**
 	 * <pre>
 	 * 주문하기(제품번호, 주문수량): 구매금액(int)
@@ -35,7 +75,11 @@ public class VendingMachineArray {
 	 * @param menu 제품번호
 	 * @param quantity 메뉴 주문 수량
 	 */
-	public int orderVendingMachine(int menu, int quantity) {
+	public int orderVendingMachine(int menu, int quantity, int receivedPrice) {
+		
+		// === RefundableDrinkVendingMachine을 위한 수정 시작 === //
+		this.receivedPrice = receivedPrice;
+		// === RefundableDrinkVendingMachine을 위한 수정 끝 === //
 		
 		// 주문가능 메뉴가 아닌 경우
 		if(menu < 0 || menu >= this.drinks.length) {
@@ -52,9 +96,17 @@ public class VendingMachineArray {
 			return 0;
 		}
 		
+		//주문 가능한 경우
 		//재고에서 판매수량 빼기
 		drink.setStockInQuantity(drink.getStockInQuantity() - quantity);
+		int saleprice = drink.getPrice() * quantity;
 		System.out.println(drink.getName() + " 음료를 " + quantity + "개 주문 했습니다.");
+		
+		// === RefundableDrinkVendingMachine을 위한 수정 시작 === //
+		this.account += saleprice;
+		this.receivedPrice -= saleprice;	// -가 된다면 돈을 더 넣어야하고 + 이면 환불 진행
+		// === RefundableDrinkVendingMachine을 위한 수정 끝 === //
+		
 		return drink.getPrice() * quantity;	
 		
 	}

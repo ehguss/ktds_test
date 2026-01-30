@@ -25,22 +25,22 @@ public class VendingMachinArrayTest {
 		VendingMachineArray inSubway = new VendingMachineArray(bacchus, monster, hotSix, milKis);
 
 		
-		int price = inSubway.orderVendingMachine(1, 3);
+		int price = inSubway.orderVendingMachine(1, 3, 5000);
 		System.out.println(price);
 
-		price = inSubway.orderVendingMachine(0, 4);
+		price = inSubway.orderVendingMachine(0, 4, 5000);
 		System.out.println(price);
 		
-		price = inSubway.orderVendingMachine(4, 3);
+		price = inSubway.orderVendingMachine(4, 3, 5000);
 		System.out.println(price);
 		
-		price = inSubway.orderVendingMachine(5, 3);
+		price = inSubway.orderVendingMachine(5, 3, 5000);
 		System.out.println(price);
 		
-		price = inSubway.orderVendingMachine(2, 3);
+		price = inSubway.orderVendingMachine(2, 3, 5000);
 		System.out.println(price);
 		
-		price = inSubway.orderVendingMachine(1, 3);
+		price = inSubway.orderVendingMachine(1, 3, 5000);
 		System.out.println(price);
 		
 		inSubway.stockInVendingMachine(1, 10);
