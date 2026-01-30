@@ -1,6 +1,7 @@
 package com.ktdsuniversity.edu.homework.shop;
 
 import com.ktdsuniversity.edu.homework.shop.item.Stuff;
+import com.ktdsuniversity.edu.homework.shop.consumer.Consumer;
 import com.ktdsuniversity.edu.homework.shop.item.Mart;
 
 public class Order {
@@ -8,8 +9,8 @@ public class Order {
 	public static void main(String[] args) {
 		
 		Consumer kimDoHyeon = new Consumer("김도현", 10000, 900000);
-		Consumer leeJaeYong = new Consumer("이재용", 100000, 500);
-		Consumer stevenJobs= new Consumer("스티브잡스", 100000000, 1000);
+		Consumer leeJaeYong = new Consumer("이재용", 100_000, 500);
+		Consumer stevenJobs= new Consumer("스티브잡스", 500_000, 100000);
 		
 		Stuff egg = new Stuff("계란", 1000, 10);
 		Stuff mango = new Stuff("망고", 5000, 20);
@@ -30,7 +31,9 @@ public class Order {
 		nike.order(kimDoHyeon, nike, 1 , 2, 10000);
 		adidas.order(leeJaeYong, adidas,  1 , 9, 100000);
 		
-		cu.order(stevenJobs, cu, 0, 10, 50000);
+//		cu.order(stevenJobs, cu, 0, 10, 50000);
+		
+		shinSeGae.order(stevenJobs, hyunDai, 2, 50, 80_000);
 	}
 
 }

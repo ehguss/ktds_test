@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.homework.shop;
+package com.ktdsuniversity.edu.homework.shop.consumer;
 
 public class Consumer {
 	
@@ -17,6 +17,11 @@ public class Consumer {
 	 */
 	private int point;
 	
+	/**
+	 * 판매자 가용 포인트;
+	 */
+	private int usefulPoint;
+
 	//생성자
 	public Consumer(String name, int account, int point) {
 		this.name = name;
@@ -50,4 +55,11 @@ public class Consumer {
 	}
 
 	
+	public int getUsefulPoint() {
+		return usefulPoint;
+	}
+
+	public void setUsefulPoint(int usefulPoint) {
+		this.usefulPoint = usefulPoint;
+	}
 }

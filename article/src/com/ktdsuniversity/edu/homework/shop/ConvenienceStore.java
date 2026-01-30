@@ -1,5 +1,6 @@
 package com.ktdsuniversity.edu.homework.shop;
 
+import com.ktdsuniversity.edu.homework.shop.consumer.Consumer;
 import com.ktdsuniversity.edu.homework.shop.item.Mart;
 import com.ktdsuniversity.edu.homework.shop.item.Stuff;
 
@@ -26,26 +27,28 @@ public class ConvenienceStore extends Mart{
 	//-> 110원 있으면 110원이 현금으로 됨.
 	// 그리고 포인트를 사용한다면 그 이후 포인트는 0이 됨.(한번에 다써야함)
 	
-
-
 	public void getPoint(Consumer consumer) {
 	
-		System.out.println("super.getSaleprice() " + super.getSaleprice());
 		double pointMoney = super.getSaleprice() * 0.001;
 		int consumerPoint = consumer.getPoint();
 		consumerPoint += pointMoney;
 		
 		consumer.setPoint(consumerPoint);
-		System.out.println(consumer.getName() + "님 포인트  " + pointMoney + "원이 적립되었습니다.");
+		System.out.println(consumer.getName() + "님 포인트  " + (int)pointMoney + "원이 적립되었습니다.");
 	}
 	
 	public int usePoint(Consumer consumer) {
 		// 사용자의 포인트 확인 후 조건에 해당된다면 포인트 사용하기
+		// 단 포인트는 다 써야 한다.
+		// 포인트 금액보다 적은 돈을 지불할 경우에도 포인트는 0이 된다.	
 		int consumerPoint = consumer.getPoint();
 		if(consumerPoint > 100) {
-			int consumerAccount = consumer.getAccount();
-			consumerAccount += consumerPoint;
-			return consumerAccount;
+			System.out.println("포인트가 "+ consumerPoint +"원 사용되었습니다.");
+			consumer.setPoint(0);
+			return consumerPoint;
+		}
+		else {
+			System.out.println("가용포인트가 없습니다.");
 		}
 		return consumer.getAccount();
 	}

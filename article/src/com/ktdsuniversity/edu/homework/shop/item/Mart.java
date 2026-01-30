@@ -1,8 +1,8 @@
 package com.ktdsuniversity.edu.homework.shop.item;
 
-import com.ktdsuniversity.edu.homework.shop.Consumer;
 import com.ktdsuniversity.edu.homework.shop.ConvenienceStore;
 import com.ktdsuniversity.edu.homework.shop.DepartmentStore;
+import com.ktdsuniversity.edu.homework.shop.consumer.Consumer;
 
 public class Mart {
 	
@@ -107,32 +107,35 @@ public class Mart {
 		this.setSaleprice(stuff.getPrice() * quantity);
 		this.martAccount += this.saleprice;
 		this.setMartAccount(this.martAccount);
-		this.receivedPrice -= this.saleprice;
 		
+		System.out.println("구매가 완료되었습니다.");
+		
+		System.out.println(consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개 - " + this.getSaleprice() + "원");
 
 		// 편의점일 경우
 		if( mart instanceof ConvenienceStore cMart) {
-			cMart.usePoint(consumer);
+			int usefulPoint = cMart.usePoint(consumer);
+			consumer.setUsefulPoint(usefulPoint);
 			cMart.getPoint(consumer);
 		}
 		
 		//백화점인 경우
 		if (mart instanceof DepartmentStore dStore) {
-			dStore.getPoint();
+			int usefulPoint = dStore.usePoint(consumer);
+			consumer.setUsefulPoint(usefulPoint);
+			dStore.getPoint(consumer);
 		}
 		
-		consumer.setAccount(consumer.getAccount() - this.getSaleprice());
+		int pointPlusAccount = consumer.getAccount() + consumer.getUsefulPoint();
+		consumer.setAccount(pointPlusAccount - this.getSaleprice());
 		
+
+		this.receivedPrice -= this.saleprice - consumer.getUsefulPoint();
 		if(this.receivedPrice > 0) {
 			System.out.println(this.receivedPrice + "만큼 거스름돈이 발생했습니다. 받아가세요.");
 		}
-		System.out.println("구매가 완료되었습니다.");
-		
-		
-
 		System.out.println(consumer.getName() + "의 소지금 : " + consumer.getAccount());
-		System.out.println(consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개 - " + this.getSaleprice() + "원");
+		System.out.println(consumer.getName() + "의 포인트 : " + (int)(consumer.getPoint()));
 		System.out.println();
-		
 	}
 }
