@@ -22,9 +22,9 @@ public class DepartmentStore extends ConvenienceStore{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void getPoint(Consumer consumer) {
+	public void getDPoint(Consumer consumer) {
 		
-		if( consumer instanceof VVIP) {
+		if( consumer instanceof VVIP ) {
 //			고객의 등급이 VVIP인 경우 3%의 포인트를 지급 받습니다.
 			double pointMoney = super.getSaleprice() * 0.03;
 			int consumerPoint = consumer.getPoint();
@@ -51,29 +51,29 @@ public class DepartmentStore extends ConvenienceStore{
 
 	}
 
-	public int discount(Consumer consumer) {
+	public int discount(Consumer consumer, int stuffAllPrice) {
 		
 		int discount = 0;
 		if( consumer instanceof VVIP) {
 //			고객의 등급이 VVIP인 경우 10% 할인 혜택을 제공받습니다.
-			
-			return discount;
+			int finalAllPrice = (int) (stuffAllPrice * 0.9);
+			return finalAllPrice ;
 
 		}
 		else if( consumer instanceof VIP ) {
 //			고객의 등급이 VIP등급일 경우 3% 할인 혜택을 제공받습니다.
-			
-			return discount;
+
+			int finalAllPrice = (int) (stuffAllPrice * 0.97);
+			return finalAllPrice;
 		}
 		else if( consumer instanceof Consumer) {
 			//고객의 등급이 일반등급일 경우 할인 혜택은 제공받지 못합니다.
-			
-			return 0;
+			return stuffAllPrice;
 		}
 		return discount;
 	}
 	
-	public int usePoint(Consumer consumer) {
+	public int useDPoint(Consumer consumer) {
 //		고객의 포인트가 10000점이 넘어갈 경우, 현금처럼 사용할 수 있습니다. - 포인트는 전액을 사용하거나 일부만 사용할 수도 있습니다.	
 		int consumerPoint = consumer.getPoint();
 		
@@ -83,7 +83,7 @@ public class DepartmentStore extends ConvenienceStore{
 			int wantUsePoint = sc.nextInt();
 			System.out.println("포인트가 "+ wantUsePoint +"원 사용되었습니다.");
 			consumer.setPoint(consumerPoint - wantUsePoint);
-			return consumerPoint;
+			return wantUsePoint;
 		}
 		else {
 			System.out.println("가용포인트가 없습니다.");

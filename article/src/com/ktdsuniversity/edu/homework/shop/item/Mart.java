@@ -80,7 +80,33 @@ public class Mart {
 	public void order(Consumer consumer, Mart mart, int menu, int quantity, int price) {
 		
 
+		Stuff stuff = this.stuffs[menu];
 		this.receivedPrice = price;
+		int stuffAllPrice = stuff.getPrice() * quantity;
+		System.out.println(consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개, 합계 : " + stuffAllPrice + "원");
+		
+
+		int usefulPoint = consumer.getUsefulPoint();
+		//포인트 확인 및 할인
+		//백화점인 경우
+		if (mart instanceof DepartmentStore dStore) {
+			usefulPoint = dStore.useDPoint(consumer);
+			consumer.setUsefulPoint(usefulPoint);
+			stuffAllPrice = dStore.discount(consumer, stuffAllPrice) - usefulPoint;
+		}
+		
+		// 편의점일 경우
+		else if( mart instanceof ConvenienceStore cMart) {
+			usefulPoint = cMart.useCPoint(consumer);
+			consumer.setUsefulPoint(usefulPoint);
+			if(stuffAllPrice > usefulPoint) {
+				stuffAllPrice -= usefulPoint;				
+			}
+			else {
+				stuffAllPrice -= stuffAllPrice;
+			}
+		}
+		
 		
 		// 존재하지 않는 메뉴 주문한 경우
 		if(menu < 0 || menu >= this.stuffs.length) {
@@ -89,53 +115,51 @@ public class Mart {
 		}
 		
 		// 고객이 소지한 돈보다 상품금액이 더 큰 경우
-		if(this.stuffs[menu].getPrice() * quantity > consumer.getAccount()) {
-			System.out.println("소지금보다 상품금액이 더 큽니다. 구매가 불가능합니다.");
+		if(stuffAllPrice > price + consumer.getUsefulPoint()) {
+			System.out.println("지불금액보다 상품금액이 더 큽니다. 구매가 불가능합니다.");
 			return;
 		}
 		// 주문한 금액보다 낸 돈이 더 적은 경우
-		if(this.stuffs[menu].getPrice() * quantity > price) {
+		if(stuffAllPrice > price + usefulPoint) {
 //			System.out.println(this.stuffs[menu].getPrice());
-			System.out.println(consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개");
+			System.out.println(consumer.getName() + "가 낸 금액 : " + ( price + usefulPoint )+ "원 - 돈이 부족합니다.");
 			return;
 		}
 		
-		Stuff stuff = this.stuffs[menu];
 		
 		//주문 한 경우
 		//account에 판매 금액 추가하고 거스름돈 주기
-		this.setSaleprice(stuff.getPrice() * quantity);
+		this.setSaleprice(stuffAllPrice);
 		this.martAccount += this.saleprice;
 		this.setMartAccount(this.martAccount);
 		
-		System.out.println("구매가 완료되었습니다.");
-		
-		System.out.println(consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개 - " + this.getSaleprice() + "원");
-
-		// 편의점일 경우
-		if( mart instanceof ConvenienceStore cMart) {
-			int usefulPoint = cMart.usePoint(consumer);
-			consumer.setUsefulPoint(usefulPoint);
-			cMart.getPoint(consumer);
-		}
+		System.out.println("== 구매가 완료되었습니다. ==");
 		
 		//백화점인 경우
 		if (mart instanceof DepartmentStore dStore) {
-			int usefulPoint = dStore.usePoint(consumer);
-			consumer.setUsefulPoint(usefulPoint);
-			dStore.getPoint(consumer);
+			dStore.getDPoint(consumer);
 		}
 		
+		// 편의점일 경우
+		else if( mart instanceof ConvenienceStore cMart) {
+			cMart.getCPoint(consumer);
+		}
+		
+
+		// 포인트를 사용했다면 포인트는 0원이 되고 
 		int pointPlusAccount = consumer.getAccount() + consumer.getUsefulPoint();
 		consumer.setAccount(pointPlusAccount - this.getSaleprice());
 		
-
 		this.receivedPrice -= this.saleprice - consumer.getUsefulPoint();
 		if(this.receivedPrice > 0) {
 			System.out.println(this.receivedPrice + "만큼 거스름돈이 발생했습니다. 받아가세요.");
 		}
+		
+		
 		System.out.println(consumer.getName() + "의 소지금 : " + consumer.getAccount());
 		System.out.println(consumer.getName() + "의 포인트 : " + (int)(consumer.getPoint()));
 		System.out.println();
 	}
+
+
 }

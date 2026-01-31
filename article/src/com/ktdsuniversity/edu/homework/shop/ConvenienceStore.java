@@ -27,7 +27,7 @@ public class ConvenienceStore extends Mart{
 	//-> 110원 있으면 110원이 현금으로 됨.
 	// 그리고 포인트를 사용한다면 그 이후 포인트는 0이 됨.(한번에 다써야함)
 	
-	public void getPoint(Consumer consumer) {
+	public void getCPoint(Consumer consumer) {
 	
 		double pointMoney = super.getSaleprice() * 0.001;
 		int consumerPoint = consumer.getPoint();
@@ -37,7 +37,7 @@ public class ConvenienceStore extends Mart{
 		System.out.println(consumer.getName() + "님 포인트  " + (int)pointMoney + "원이 적립되었습니다.");
 	}
 	
-	public int usePoint(Consumer consumer) {
+	public int useCPoint(Consumer consumer) {
 		// 사용자의 포인트 확인 후 조건에 해당된다면 포인트 사용하기
 		// 단 포인트는 다 써야 한다.
 		// 포인트 금액보다 적은 돈을 지불할 경우에도 포인트는 0이 된다.	
