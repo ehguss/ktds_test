@@ -6,5 +6,4 @@ public class NullOperatorException extends RuntimeException{
 		super(message);
 	}
 	
-	
 }

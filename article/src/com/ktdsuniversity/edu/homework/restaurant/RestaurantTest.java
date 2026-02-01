@@ -1,6 +1,9 @@
 package com.ktdsuniversity.edu.homework.restaurant;
 
 import com.ktdsuniversity.edu.coffee.Coffee;
+import com.ktdsuniversity.edu.homework.restaurant.exception.DrunkenException;
+import com.ktdsuniversity.edu.homework.restaurant.exception.FullException;
+import com.ktdsuniversity.edu.homework.restaurant.exception.NotEnoughMoneyException;
 
 public class RestaurantTest {
 		
@@ -38,15 +41,63 @@ public class RestaurantTest {
 		Restaurant madForGarlic= new Restaurant("madForGarlic", madForGarlicCuisine, madForGarlicDrink, 3000, 10000);
 
 		
-		outBack.isGuestCanOrder(kimDoHyeon, 2, 1);
-		outBack.isGuestCanOrder(leeJaeYong, 3, 5);
-		outBack.isGuestCanOrder(stevenJobs, 6, 6);
-		vips.isGuestCanOrder(stevenJobs, 1000, 0);
-		vips.isGuestCanOrder(kimDoHyeon, 5, 0);
-		vips.isGuestCanOrder(leeJaeYong, 100, 0);
-		madForGarlic.isGuestCanOrder(stevenJobs, 0, 2);
-		madForGarlic.isGuestCanOrder(kimDoHyeon, 6, 0);
-		madForGarlic.isGuestCanOrder(leeJaeYong, 5, 0);
+//		outBack.isGuestCanOrder(kimDoHyeon, 2, 1);
+//		outBack.isGuestCanOrder(leeJaeYong, 3, 5);
+//		outBack.isGuestCanOrder(stevenJobs, 6, 6);
+//		vips.isGuestCanOrder(stevenJobs, 1000, 0);
+//		vips.isGuestCanOrder(kimDoHyeon, 5, 0);
+//		vips.isGuestCanOrder(leeJaeYong, 100, 0);
+//		madForGarlic.isGuestCanOrder(stevenJobs, 0, 2);
+//		madForGarlic.isGuestCanOrder(kimDoHyeon, 6, 0);
+//		madForGarlic.isGuestCanOrder(leeJaeYong, 5, 0);
+		
+		try {
+			outBack.isGuestCanOrderWithException(stevenJobs, 2, 1);
+		} catch (FullException fe) {
+			System.out.println(fe.getMessage());
+		}
+		catch (DrunkenException de) {
+			System.out.println(de.getMessage());
+		}
+		catch (NotEnoughMoneyException neme) {
+			System.out.println(neme.getMessage());
+		}
+		
+		try {
+			outBack.isGuestCanOrderWithException(kimDoHyeon, 2, 1);
+		} catch (FullException fe) {
+			System.out.println(fe.getMessage());
+		}
+		catch (DrunkenException de) {
+			System.out.println(de.getMessage());
+		}
+		catch (NotEnoughMoneyException neme) {
+			System.out.println(neme.getMessage());
+		}
+		
+		try {
+			vips.isGuestCanOrderWithException(stevenJobs, 1000, 0);
+		} catch (FullException fe) {
+			System.out.println(fe.getMessage());
+		}
+		catch (DrunkenException de) {
+			System.out.println(de.getMessage());
+		}
+		catch (NotEnoughMoneyException neme) {
+			System.out.println(neme.getMessage());
+		}
+		
+		try {
+			madForGarlic.isGuestCanOrderWithException(stevenJobs, 0, 2);
+		} catch (FullException fe) {
+			System.out.println(fe.getMessage());
+		}
+		catch (DrunkenException de) {
+			System.out.println(de.getMessage());
+		}
+		catch (NotEnoughMoneyException neme) {
+			System.out.println(neme.getMessage());
+		}
 		
 		
 	}
