@@ -57,6 +57,8 @@ public class DepartmentStore extends ConvenienceStore{
 		if( consumer instanceof VVIP) {
 //			고객의 등급이 VVIP인 경우 10% 할인 혜택을 제공받습니다.
 			int finalAllPrice = (int) (stuffAllPrice * 0.9);
+			System.out.println("\n" + consumer.getName() + "님은 VVIP 등급으로 10프로 할인혜택이 적용됩니다.");
+			System.out.println("할인 금액 : " + (int)(stuffAllPrice * 0.1) + "원");
 			return finalAllPrice ;
 
 		}
@@ -82,7 +84,6 @@ public class DepartmentStore extends ConvenienceStore{
 			System.out.print("포인트로 사용할 금액을 입력하세요 : ");
 			int wantUsePoint = sc.nextInt();
 			System.out.println("포인트가 "+ wantUsePoint +"원 사용되었습니다.");
-			consumer.setPoint(consumerPoint - wantUsePoint);
 			return wantUsePoint;
 		}
 		else {

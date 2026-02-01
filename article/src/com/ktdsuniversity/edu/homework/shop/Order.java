@@ -31,23 +31,22 @@ public class Order {
 		Mart hyunDai= new DepartmentStore("현대", egg, mango, water);
 		
 //		nike.order(kimDoHyeon, nike, 1 , 2, 10000);
-//		adidas.order(leeJaeYong, adidas,  1 , 9, 100000);
-		
+//		adidas.order(leeJaeYong, adidas,  1 , 9, 100000);		
 //		cu.order(stevenJobs, cu, 0, 10, 50000);
 		
-		shinSeGae.order(stevenJobs, shinSeGae, 2, 50, 10_000);
-		shinSeGae.order(kimDoHyeon, shinSeGae, 2, 50, 10_000);
-		shinSeGae.order(leeJaeYong, shinSeGae, 2, 50, 10_000);
+//		shinSeGae.order(stevenJobs, shinSeGae, 2, 50, 10_000);
+//		shinSeGae.order(kimDoHyeon, shinSeGae, 2, 50, 10_000);
+//		shinSeGae.order(leeJaeYong, shinSeGae, 2, 50, 10_000);
 		
 		
 		cu.order(stevenJobs, cu, 2, 50, 10_000);
 		cu.order(kimDoHyeon, cu, 2, 50, 10_000);
 		cu.order(leeJaeYong, cu, 2, 50, 10_000);
-		
-		
-		adidas.order(stevenJobs, adidas, 2, 50, 10_000);
-		adidas.order(kimDoHyeon, adidas, 2, 50, 10_000);
-		adidas.order(leeJaeYong, adidas, 2, 50, 10_000);
+//		
+//		
+//		adidas.order(stevenJobs, adidas, 2, 50, 10_000);
+//		adidas.order(kimDoHyeon, adidas, 2, 50, 10_000);
+//		adidas.order(leeJaeYong, adidas, 2, 50, 10_000);
 		
 		
 	}

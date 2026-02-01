@@ -44,7 +44,7 @@ public class ConvenienceStore extends Mart{
 		int consumerPoint = consumer.getPoint();
 		if(consumerPoint > 100) {
 			System.out.println("포인트가 "+ consumerPoint +"원 사용되었습니다.");
-			consumer.setPoint(0);
+//			consumer.setPoint(0);
 			return consumerPoint;
 		}
 		else {
