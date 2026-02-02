@@ -1,5 +1,7 @@
 package com.ktdsuniversity.edu.homework.restaurant;
 
+import java.util.List;
+
 import com.ktdsuniversity.edu.homework.restaurant.exception.DrunkenException;
 import com.ktdsuniversity.edu.homework.restaurant.exception.FullException;
 import com.ktdsuniversity.edu.homework.restaurant.exception.NotEnoughMoneyException;
@@ -42,7 +44,6 @@ public class Restaurant {
 	 * 레스토랑에서 판매하는 주류
 	 */
 	Menu drink;
-	
 	
 	public Restaurant(String name, Menu cuisine, Menu drink, int restaurantMaxFullLevel, double restaurantMaxDrunkLevel) {
 		this.name = name;

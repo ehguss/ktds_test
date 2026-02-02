@@ -1,5 +1,8 @@
 package com.ktdsuniversity.edu.homework.restaurant;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Menu {
 	
 	
@@ -21,6 +24,7 @@ public class Menu {
 	 * 주류의 취함 정도
 	 */
 	private int drinkDrunkLevel;
+	
 	
 	public Menu(String menuName, int cuisineFullLevel, int drinkDrunkLevel) {
 		this.menuName = menuName;

@@ -3,22 +3,22 @@ package com.ktdsuniversity.edu.homework.shop.consumer;
 public class Consumer {
 	
 	/**
-	 * 판매자 이름
+	 * 소비자 이름
 	 */
 	private String name;
 	
 	/**
-	 * 판매자 자본금
+	 * 소비자 자본금
 	 */
 	private int account;
 	
 	/**
-	 * 판매자 포인트
+	 * 소비자 포인트
 	 */
 	private int point;
 	
 	/**
-	 * 판매자 가용 포인트;
+	 * 소비자 가용 포인트;
 	 */
 	private int usefulPoint;
 

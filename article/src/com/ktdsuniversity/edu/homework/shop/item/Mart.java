@@ -88,7 +88,7 @@ public class Mart {
 		// 주문한 금액보다 낸 돈이 더 적은 경우
 		// 일반마트일 경우 지불금액이 소지금보다 클 경우 주문 불가
 		if (mart instanceof GeneralMart gMart) {
-			if(price > consumer.getAccount()) {
+			if(this.stuffs[menu].getPrice() * quantity > price) {
 				System.out.println("지불금액보다 상품금액이 더 큽니다. 구매가 불가능합니다.");
 				return false;
 			}
@@ -97,15 +97,10 @@ public class Mart {
 		else {
 			// 고객이 지불한 금액(지불금액 + usefulPoint)보다 상품금액이 더 큰 경우
 			if(this.stuffs[menu].getPrice() * quantity > price + consumer.getUsefulPoint()) {
-				System.out.println("지불금액보다 상품금액이 더 큽니다. 구매가 불가능합니다.");
+				System.out.println("지불금액보다 상품금액이 더 큽니다. 구매가 불가능합니다.\n");
 				return false;
 			}
 		}
-				
-//		if(stuffAllPrice > price + usefulPoint) {
-//			System.out.println(consumer.getName() + "가 낸 금액 : " + ( price + usefulPoint )+ "원 - 돈이 부족합니다.");
-//			return false;
-//		}
 		
 		return true;
 	}
@@ -116,7 +111,7 @@ public class Mart {
 		Stuff stuff = this.stuffs[menu];
 		this.receivedPrice = price;
 		int stuffAllPrice = stuff.getPrice() * quantity;
-		System.out.println("\n" + consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개, 합계 : " + stuffAllPrice + "원");
+		System.out.println(consumer.getName() + "의 구매목록 : " + this.stuffs[menu].getStuffName() + " " + quantity + "개, 합계 : " + stuffAllPrice + "원");
 		
 
 		int usefulPoint = consumer.getUsefulPoint();
@@ -175,7 +170,7 @@ public class Mart {
 			
 //			this.receivedPrice -= this.saleprice - consumer.getUsefulPoint();
 			if(this.receivedPrice > 0) {
-				System.out.println(this.receivedPrice + "만큼 거스름돈이 발생했습니다. 받아가세요.");
+				System.out.println(this.receivedPrice + "원 만큼 거스름돈이 발생했습니다. 받아가세요.");
 			}
 			int account = consumer.getAccount();
 			consumer.setAccount(account - price + this.receivedPrice - stuffAllPrice);

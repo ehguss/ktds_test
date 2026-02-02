@@ -10,9 +10,9 @@ public class Order {
 
 	public static void main(String[] args) {
 		
-		Consumer kimDoHyeon = new Consumer("김도현", 10000, 900000);
+		Consumer kimDoHyeon = new Consumer("김도현", 10_000, 900_000);
 		Consumer leeJaeYong = new VIP("이재용", 100_000, 500);
-		Consumer stevenJobs= new VVIP("스티브잡스", 500_000, 100000);
+		Consumer stevenJobs= new VVIP("스티브잡스", 500_000, 100_000);
 		
 		Stuff egg = new Stuff("계란", 1000, 10);
 		Stuff mango = new Stuff("망고", 5000, 20);
@@ -34,16 +34,16 @@ public class Order {
 //		adidas.order(leeJaeYong, adidas,  1 , 9, 100000);		
 //		cu.order(stevenJobs, cu, 0, 10, 50000);
 		
-//		shinSeGae.order(stevenJobs, shinSeGae, 2, 50, 10_000);
-//		shinSeGae.order(kimDoHyeon, shinSeGae, 2, 50, 10_000);
-//		shinSeGae.order(leeJaeYong, shinSeGae, 2, 50, 10_000);
+		shinSeGae.order(stevenJobs, shinSeGae, 2, 50, 10_000);
+		shinSeGae.order(kimDoHyeon, shinSeGae, 2, 50, 10_000);
+		shinSeGae.order(leeJaeYong, shinSeGae, 2, 50, 10_000);
 		
 		
 		cu.order(stevenJobs, cu, 2, 50, 10_000);
 		cu.order(kimDoHyeon, cu, 2, 50, 10_000);
 		cu.order(leeJaeYong, cu, 2, 50, 10_000);
-//		
-//		
+		
+		
 //		adidas.order(stevenJobs, adidas, 2, 50, 10_000);
 //		adidas.order(kimDoHyeon, adidas, 2, 50, 10_000);
 //		adidas.order(leeJaeYong, adidas, 2, 50, 10_000);
