@@ -15,10 +15,10 @@ public class CoffeeShopTest {
 //		CoffeeShop starbucks = new CoffeeShop(hotCoffee, iceCoffee);
 		
 		//오버로딩을 하지 않았을때
-		int price = starbucks.orderCoffee(1, 3);
+		int price = starbucks.orderCoffee(Menu.HOT, 3);
 		System.out.println(price);
 		
-		price = starbucks.orderCoffee(2, 6);
+		price = starbucks.orderCoffee(Menu.COLD, 6);
 		System.out.println(price);
 		
 		//메소드 오버로딩을 하게 되면 -> 파라미터사용안해도 됨.
@@ -26,7 +26,7 @@ public class CoffeeShopTest {
 		price = starbucks.orderCoffee();
 		System.out.println(price);
 		
-		price = starbucks.orderCoffee(2);
+		price = starbucks.orderCoffee(Menu.COLD);
 		System.out.println(price);
 		System.out.println("====== 오버로딩 끝 ======");
 

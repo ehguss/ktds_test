@@ -1,6 +1,6 @@
 package com.ktdsuniversity.edu.coffee;
 
-public class CoffeeShop {
+public class CoffeeShopEnum {
 
 	/**
 	 * 커피숍에서 판매하는 따뜻한 아메리카노 (타입 선언)
@@ -14,7 +14,7 @@ public class CoffeeShop {
 	/**
 	 * 파라미터가 없는 생성자 오버로딩
 	 */
-	public CoffeeShop() {
+	public CoffeeShopEnum() {
 //		this.hot = new Coffee("기본 아메리카노", 1500, 30);
 //		this.ice = new Coffee("아이스 아메리카노", 2000, 50);
 		this(new Coffee("기본 아메리카노", 1500, 30)
@@ -22,7 +22,7 @@ public class CoffeeShop {
 		// -> CoffeeShop(Coffee hot, Coffee ice) 호출
 	}
 	// 파라미터로 클래스의 인스턴스를 옮긴다.
-	public CoffeeShop(Coffee hot, Coffee ice) {
+	public CoffeeShopEnum(Coffee hot, Coffee ice) {
 		this.hot = hot;		//this - CoffeeShop
 		this.ice = ice;		//this - CoffeeShop
 	}
@@ -33,7 +33,7 @@ public class CoffeeShop {
 	 * @return
 	 */
 	public int orderCoffee() {
-		int price = this.orderCoffee(Menu.HOT);
+		int price = this.orderCoffee(1);
 		return price;
 	}
 	/**
@@ -41,7 +41,7 @@ public class CoffeeShop {
 	 * @param menu 
 	 * @return
 	 */
-	public int orderCoffee(Menu menu) {
+	public int orderCoffee(int menu) {
 		int price = this.orderCoffee(menu, 1);
 		return price;
 	}
@@ -51,11 +51,11 @@ public class CoffeeShop {
 	 * @param quantity 주문수량
 	 * @return 주문 가격
 	 */
-	public int orderCoffee(Menu menu, int quantity) {
+	public int orderCoffee(int menu, int quantity) {
 		int hotStock = hot.getStock();
 		int iceStock = ice.getStock();
 		
-		if(menu == Menu.HOT) {
+		if(menu == 1) {
 			//this를 붙이면서 출처를 명확하게 밝힌다.
 			//멤버변수의 hot
 			//this.hot.name - 스타벅스(coffeeShop)의 핫의 name이다.
@@ -72,7 +72,7 @@ public class CoffeeShop {
 				return 0;
 			}
 		}
-		else if(menu == Menu.COLD) {
+		else if(menu == 2) {
 			//this를 붙이면서 출처를 명확하게 밝힌다.
 			//멤버변수의 ice
 			if(quantity <= iceStock) {

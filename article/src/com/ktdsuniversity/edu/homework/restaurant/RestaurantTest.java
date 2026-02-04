@@ -1,6 +1,5 @@
 package com.ktdsuniversity.edu.homework.restaurant;
 
-import com.ktdsuniversity.edu.coffee.Coffee;
 import com.ktdsuniversity.edu.homework.restaurant.exception.DrunkenException;
 import com.ktdsuniversity.edu.homework.restaurant.exception.FullException;
 import com.ktdsuniversity.edu.homework.restaurant.exception.NotEnoughMoneyException;

@@ -1,7 +1,5 @@
 package com.ktdsuniversity.edu.homework.restaurant;
 
-import java.util.List;
-
 import com.ktdsuniversity.edu.homework.restaurant.exception.DrunkenException;
 import com.ktdsuniversity.edu.homework.restaurant.exception.FullException;
 import com.ktdsuniversity.edu.homework.restaurant.exception.NotEnoughMoneyException;
@@ -139,7 +137,6 @@ public class Restaurant {
 		// 1. 구매자: 식사 가능한가요?
 		// 2. 판매자: 배부름정도와 취함정도를 알려주세요
 		//           손님의 배부름정도 > 식당의 기준배부름 && 손님의 취함정도 > 식당의 취함정도 라면 주문가능
-		int guestAsset = guest.getAsset();
 		int price= (cuisineQuantity + drinkQuantity) * cuisine.getPRICE();
 		
 		System.out.println("고객명 : " + guest.getName());
