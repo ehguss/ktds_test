@@ -62,9 +62,7 @@ public class FriendList {
 			for(Friend f : this.friends) {
 				buffer.append(f);
 				buffer.append("\n");
-				
 			}
-			
 		}
 		
 		return buffer.toString();
