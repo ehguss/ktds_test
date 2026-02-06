@@ -30,7 +30,8 @@ public class Item {
 		this.expireDate = expireDate;
 	}
 	
-	
-	
-	//toString
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }
