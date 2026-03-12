@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ktdsuniversity.edu.board.dao.query.BoardQuery;
 import com.ktdsuniversity.edu.board.db.helper.DataAccessHelper;
@@ -15,123 +17,266 @@ import com.ktdsuniversity.edu.board.vo.BoardVO;
  * - Java에서 DB로 데이터 생성,수정,삭제,조회를 하기 위한 클래스
  */
 public class BoardDao {
-
+	
+	// DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD"); 로 연결하는 것이 아닌 한번에 연결
+	// try-catch 문장 제거
+	private DataAccessHelper dah;
+	
+	public BoardDao(DataAccessHelper dah) {
+		this.dah = dah;
+	}
+	
 	//select - 게시글 조회
+//	public BoardVO readArticle(String articleId) {
+//		
+//		// UPDATE => 조회수를 1증가
+//		// 연결끝
+//		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
+//		try {
+//			// 게시글 조회수 1 증가(update)
+//			dah.preparedStatement(BoardQuery.makeUpdateViewCountQuery(), (pstmt) -> {
+//				pstmt.setString(1, articleId);
+//			});
+//			
+//			dah.executeQuery(SQLType.UPDATE, null);
+//			
+//			// SELECT => 증가 후 게시글의 내용 조회
+//			// fetchRow - 해당 인터페이스에 데이터를 넣는다.
+//			
+//			// result에 rs의 내용을 넣는다.
+//			BoardVO result = new BoardVO();
+//			dah.preparedStatement(BoardQuery.makeSelectOneQuery(), (pstmt) -> {
+//				pstmt.setString(1, articleId);
+//			});
+//			
+//			dah.executeQuery(SQLType.SELECT, rs -> {
+////				result에 rs.getString(1) 즉,쿼리문의 첫번째 값을 넣어준다. 그러나 순서는 쿼리를 어떻게 짜는지에 따라달라지므로 순서보다 컬럼명을 넣어주는것이 좋다.
+//				result.setId(rs.getString("ID"));
+//				result.setTitle(rs.getString("TITLE"));
+//				result.setContent(rs.getString("CONTENT"));
+//				result.setViewCount(rs.getInt("VIEW_COUNT"));
+//				result.setWriteDate(rs.getString("WRITE_DATE"));
+//				result.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));
+//			});
+//			
+//			dah.commit();
+//			
+//			return result;
+//		}
+//		catch(RuntimeException re) {
+//			dah.rollback();
+//			System.out.println(re.getMessage());
+//		}
+//		finally{
+//			dah.close();
+//		}
+//		
+//		return null;
+//	}
+	
+	public void updateViewCount(String articleId) {
+		// 기존꺼 분리
+		// UPDATE => 조회수를 1증가
+		// 게시글 조회수 1 증가(update)
+		this.dah.preparedStatement(BoardQuery.makeUpdateViewCountQuery(), (pstmt) -> {
+			pstmt.setString(1, articleId);
+		});
+		
+		this.dah.executeQuery(SQLType.UPDATE, null);		
+	}
+	
 	public BoardVO readArticle(String articleId) {
 		
-		// UPDATE => 조회수를 1증가
-		// 연결끝
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
-		try {
-			dah.preparedStatement(BoardQuery.makeUpdateViewCountQuery(), (pstmt) -> {
-				pstmt.setString(1, articleId);
-			});
-			
-			dah.executeQuery(SQLType.UPDATE, null);
-			
-			// SELECT => 증가 후 게시글의 내용 조회
-			// fetchRow - 해당 인터페이스에 데이터를 넣는다.
-			
-			// result에 rs의 내용을 넣는다.
-			BoardVO result = new BoardVO();
-			dah.preparedStatement(BoardQuery.makeSelectOneQuery(), (pstmt) -> {
-				pstmt.setString(1, articleId);
-			});
-			
-			dah.executeQuery(SQLType.SELECT, rs -> {
-//				result에 rs.getString(1) 즉,쿼리문의 첫번째 값을 넣어준다. 그러나 순서는 쿼리를 어떻게 짜는지에 따라달라지므로 순서보다 컬럼명을 넣어주는것이 좋다.
-				result.setId(rs.getString("ID"));
-				result.setTitle(rs.getString("TITLE"));
-				result.setContent(rs.getString("CONTENT"));
-				result.setViewCount(rs.getInt("VIEW_COUNT"));
-				result.setWriteDate(rs.getString("WRITE_DATE"));
-				result.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));
-			});
-			
-			dah.commit();
-			
-			return result;
-		}
-		catch(RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		}
-		finally{
-			dah.close();
-		}
+		// 두개의 쿼리(update(조회수 1증가) + select(게시글 조회)) -> 두개를 분리하여 동작하도록 하자.
 		
-		return null;
+		// SELECT => 증가 후 게시글의 내용 조회		
+		// result에 rs의 내용을 넣는다.
+		BoardVO result = new BoardVO();
+		this.dah.preparedStatement(BoardQuery.makeSelectOneQuery(), (pstmt) -> {
+			pstmt.setString(1, articleId);
+		});
+		
+		this.dah.executeQuery(SQLType.SELECT, rs -> {
+//				result에 rs.getString(1) 즉,쿼리문의 첫번째 값을 넣어준다. 그러나 순서는 쿼리를 어떻게 짜는지에 따라달라지므로 순서보다 컬럼명을 넣어주는것이 좋다.
+			result.setId(rs.getString("ID"));
+			result.setTitle(rs.getString("TITLE"));
+			result.setContent(rs.getString("CONTENT"));
+			result.setViewCount(rs.getInt("VIEW_COUNT"));
+			result.setWriteDate(rs.getString("WRITE_DATE"));
+			result.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));
+		});
+		
+		return result;
+		
+	}
+	//select - 게시글 조회
+//	public List<BoardVO> readAllArticles() {
+//		
+//		// UPDATE => 조회수를 1증가
+//		// 연결끝
+//		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
+//		try {
+//			// SELECT => 증가 후 게시글의 내용 조회
+//			// fetchRow - 해당 인터페이스에 데이터를 넣는다.
+//			
+//			// result에 rs의 내용을 넣는다.
+//			List<BoardVO> result = new ArrayList<>();
+//			// 파라미터 할당할게 없을 경우 - null
+//			dah.preparedStatement(BoardQuery.makeSelectAllQuery(), null);
+//			dah.executeQuery(SQLType.SELECT, rs -> {
+////				eachArticle에 rs.getString(1) 즉,쿼리문의 첫번째 값을 넣어준다. 그러나 순서는 쿼리를 어떻게 짜는지에 따라달라지므로 순서보다 컬럼명을 넣어주는것이 좋다.
+//				BoardVO eachArticle = new BoardVO();
+//				eachArticle.setId(rs.getString("ID"));										// BoardVO
+//				eachArticle.setTitle(rs.getString("TITLE"));								// BoardVO
+//				eachArticle.setContent(rs.getString("CONTENT"));							// BoardVO
+//				eachArticle.setViewCount(rs.getInt("VIEW_COUNT"));							// BoardVO
+//				eachArticle.setWriteDate(rs.getString("WRITE_DATE"));						// BoardVO
+//				eachArticle.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));		// BoardVO
+////				한줄한줄 넣은것을 result에 add
+//				result.add(eachArticle);		// List<BoardVO>
+//			});
+//			
+//			dah.commit();
+//			
+//			return result;
+//		}
+//		catch(RuntimeException re) {
+//			dah.rollback();
+//			System.out.println(re.getMessage());
+//		}
+//		finally{
+//			dah.close();
+//		}
+//		
+//		return null;
+//	}
+	
+	public List<BoardVO> readAllArticles() {
+		
+		// UPDATE => 조회수를 1증가
+		// SELECT => 증가 후 게시글의 내용 조회
+		// fetchRow - 해당 인터페이스에 데이터를 넣는다.
+		
+		// result에 rs의 내용을 넣는다.
+		List<BoardVO> result = new ArrayList<>();
+		// 파라미터 할당할게 없을 경우 - null
+		this.dah.preparedStatement(BoardQuery.makeSelectAllQuery(), null);
+		this.dah.executeQuery(SQLType.SELECT, rs -> {
+//				eachArticle에 rs.getString(1) 즉,쿼리문의 첫번째 값을 넣어준다. 그러나 순서는 쿼리를 어떻게 짜는지에 따라달라지므로 순서보다 컬럼명을 넣어주는것이 좋다.
+			BoardVO eachArticle = new BoardVO();
+			eachArticle.setId(rs.getString("ID"));										// BoardVO
+			eachArticle.setTitle(rs.getString("TITLE"));								// BoardVO
+			eachArticle.setContent(rs.getString("CONTENT"));							// BoardVO
+			eachArticle.setViewCount(rs.getInt("VIEW_COUNT"));							// BoardVO
+			eachArticle.setWriteDate(rs.getString("WRITE_DATE"));						// BoardVO
+			eachArticle.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));		// BoardVO
+//				한줄한줄 넣은것을 result에 add
+			result.add(eachArticle);		// List<BoardVO>
+		});
+		
+		return result;
+	
 	}
 	
 	//delete
-	public void deleteArticle(String articleId) {
-		// 연결끝
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
-		
-		try {
-			dah.preparedStatement(BoardQuery.makeDeleteQuery(), (pstmt) -> {
-				pstmt.setString(1, articleId);
-			});
-			
-			dah.executeQuery(SQLType.DELETE, null);
-			dah.commit();
-		}
-		catch(RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		}
-		finally{
-			dah.close();
-		}
-	}
-	//update
-	public void modifyArticle(BoardVO modifyArticle) {
-		// 연결끝
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
-		
-		try {
-			dah.preparedStatement(BoardQuery.makeUpdateQuery(), (pstmt) -> {
-				pstmt.setString(1, modifyArticle.getTitle());
-				pstmt.setString(2, modifyArticle.getContent());
-				pstmt.setString(3, modifyArticle.getId());
-			});
-			
-			dah.executeQuery(SQLType.UPDATE, null);
-			dah.commit();
-		}
-		catch(RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		}
-		finally{
-			dah.close();
-		}
-	}
+//	public void deleteArticle(String articleId) {
+//		// 연결끝
+//		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
+//		
+//		try {
+//			dah.preparedStatement(BoardQuery.makeDeleteQuery(), (pstmt) -> {
+//				pstmt.setString(1, articleId);
+//			});
+//			
+//			dah.executeQuery(SQLType.DELETE, null);
+//			dah.commit();
+//		}
+//		catch(RuntimeException re) {
+//			dah.rollback();
+//			System.out.println(re.getMessage());
+//		}
+//		finally{
+//			dah.close();
+//		}
+//	}
 	
-	//insert
-	public void createNewArticle2(BoardVO newArticle) {
+	public void deleteArticle(String articleId) {
 		
-		// 연결끝
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
+		this.dah.preparedStatement(BoardQuery.makeDeleteQuery(), (pstmt) -> {
+			pstmt.setString(1, articleId);
+		});
 		
-		try {
-			dah.preparedStatement(BoardQuery.makeInsertQuery(), (pstmt) -> {
-				pstmt.setString(1, newArticle.getTitle());
-				pstmt.setString(2, newArticle.getContent());
-			});
-			
-			dah.executeQuery(SQLType.INSERT, null);
-			dah.commit();
-		}
-		catch(RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		}
-		finally{
-			dah.close();
-		}
+		this.dah.executeQuery(SQLType.DELETE, null);
 	}
 
+	//update
+//	public void modifyArticle(BoardVO modifyArticle) {
+//		// 연결끝
+//		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
+//		
+//		try {
+//			dah.preparedStatement(BoardQuery.makeUpdateQuery(), (pstmt) -> {
+//				pstmt.setString(1, modifyArticle.getTitle());
+//				pstmt.setString(2, modifyArticle.getContent());
+//				pstmt.setString(3, modifyArticle.getId());
+//			});
+//			
+//			dah.executeQuery(SQLType.UPDATE, null);
+//			dah.commit();
+//		}
+//		catch(RuntimeException re) {
+//			dah.rollback();
+//			System.out.println(re.getMessage());
+//		}
+//		finally{
+//			dah.close();
+//		}
+//	}
+	
+	public void modifyArticle(BoardVO modifyArticle) {
+		this.dah.preparedStatement(BoardQuery.makeUpdateQuery(), (pstmt) -> {
+			pstmt.setString(1, modifyArticle.getTitle());
+			pstmt.setString(2, modifyArticle.getContent());
+			pstmt.setString(3, modifyArticle.getId());
+		});
+		
+		this.dah.executeQuery(SQLType.UPDATE, null);
+	}
+	//insert
+//	public void createNewArticle2(BoardVO newArticle) {
+//		
+//		// 연결끝
+//		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
+//		
+//		try {
+//			dah.preparedStatement(BoardQuery.makeInsertQuery(), (pstmt) -> {
+//				pstmt.setString(1, newArticle.getTitle());
+//				pstmt.setString(2, newArticle.getContent());
+//			});
+//			
+//			dah.executeQuery(SQLType.INSERT, null);
+//			dah.commit();
+//		}
+//		catch(RuntimeException re) {
+//			dah.rollback();
+//			System.out.println(re.getMessage());
+//		}
+//		finally{
+//			dah.close();
+//		}
+//	}
+
+	public void createNewArticle2(BoardVO newArticle) {
+
+		this.dah.preparedStatement(BoardQuery.makeInsertQuery(), (pstmt) -> {
+			pstmt.setString(1, newArticle.getTitle());
+			pstmt.setString(2, newArticle.getContent());
+		});
+		
+		this.dah.executeQuery(SQLType.INSERT, null);
+		this.dah.commit();
+
+	}
 	public int createNewArticle(BoardVO newArticle) {
 		
 		//DB에 INSERT하기
